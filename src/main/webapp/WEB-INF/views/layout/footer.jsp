@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-	 <div id="container4">
+	 <div id="ftcontainer">
     <div id="uldiv">
       <ul id="footerul">
         <li><a href="#">회사소개</a></li>
@@ -31,9 +31,8 @@
     </div>
     <div id="etc">
       <p><b>구매안전서비스 가입사실 확인</b></p>
-        <p>고객님은 안전거래를 위해 현금 등으로 결제시<br>
-           저희 쇼핑몰이 가입한PG에스크로 구매안전 서비스를<br>
-           이용하실 수 있습니다.
+        <p>고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰이 가입한 <br>PG에스크로 구매안전 서비스를<br>
+           이용하실 수 있습니다.<br>
         서비스 가입사실 확인</p>
     </div>
   </div>

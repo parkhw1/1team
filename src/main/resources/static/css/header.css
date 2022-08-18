@@ -4,7 +4,7 @@
 	url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap')
 	;
 
-#container {
+#hdcontainer {
 
 	width: 1500px;
 	height: 150px;
@@ -81,7 +81,7 @@ a {
 	text-shadow: 0 -1px #eee;
 }
 
-#container2 {
+#hdcontainer2 {
 
 	margin: 0 auto;
 	width: 1500px;

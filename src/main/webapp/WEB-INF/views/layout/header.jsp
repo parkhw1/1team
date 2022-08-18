@@ -18,7 +18,7 @@
 </head>
 <body>
 
-	<div id="container">
+	<div id="hdcontainer">
 		<header>
 			<a href="#"><img src="img/로고3.png" alt="냥반댁 댕댕이 로고" class="logo"></a>
 			<input type="text" id="search" placeholder=" 무엇이든지 검색해라냥 🐾">
@@ -33,7 +33,7 @@
 			</nav>
 		</header>
 	</div>
-	<div id="container2">
+	<div id="hdcontainer2">
 
 		<ul id="topMenu2">
 			<li><a href="#">사료/간식</a></li>
