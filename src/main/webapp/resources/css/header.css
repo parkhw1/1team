@@ -54,7 +54,7 @@ nav {
 
 #topMenu>li {
 	float: left;
-	margin-top: -70px;
+	margin-top: -50px;
 	margin-left: 80px;
 }
 
@@ -62,7 +62,7 @@ ul {
 	list-style: none;
 }
 
-a {
+#topMenu>li>a {
 	text-decoration: none;
 	color: black;
 }
@@ -99,7 +99,7 @@ a {
 	width: 150px;
 	height: 50px;
 	float: left;
-
+	line-height:50px;
 	margin-left:90px;
 }
 
@@ -108,6 +108,8 @@ a {
 	font-family: 'Gamja Flower', cursive;
 	font-size: 25px;
 	font-weight: bold;
+	text-decoration: none;
+	color: black;
 }
 
 #topMenu2>li>a:hover {
