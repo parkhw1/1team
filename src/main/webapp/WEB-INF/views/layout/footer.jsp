@@ -36,6 +36,6 @@
         서비스 가입사실 확인</p>
     </div>
   </div>
-  <script type="text/javascript" src="${path}/resources/js/user.js"></script>
+ 
 </body>
 </html>

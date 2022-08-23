@@ -1,5 +1,6 @@
 package com.pro.pro.controller.api;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,14 +13,17 @@ import com.pro.pro.service.CustomerService;
 
 @RestController
 public class CustomerApiController {
+	
 	@Autowired
 	private CustomerService customerService;
 	
-	@PostMapping("/api/user")
+	@PostMapping("/auth/joinProc")
 	public ResponseDto<Integer> save(@RequestBody Customer customer) {
-		System.out.println("UserapiController호출됨");
+		System.out.println("CustomerApiController 호출됨");
 		
-		int result = customerService.회원가입(customer);
-		return new ResponseDto<Integer>(HttpStatus.OK,result);
+		customerService.회원가입(customer);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}
+	
+	
 }

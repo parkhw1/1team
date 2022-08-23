@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
-
-<div class="container">
-	<form method="post">
+<% String adminck = request.getParameter("adminck-btn");
+	pageContext.setAttribute("adminchk", adminck);
+%>
+<div class="container" >
+	<form>
 		<div >
 			<label for="id">아이디</label><br>
 			<input type="text"  placeholder="Enter id" id="id">
@@ -28,7 +30,7 @@
 				<option>선택하세요</option>
 				<option>naver.com</option>
 				<option>daum.net</option>
-				<option>gamil.com</option>
+				<option>gmail.com</option>
 				<option>yahoo.co.kr</option>
 				<option>bing.com</option>
 			</select>
@@ -38,21 +40,46 @@
 			<input type="text" placeholder="Enter address" id="address">
 		</div>
 		 <br>
+		 <c:choose>
+		<c:when test="${adminchk eq 'CUSTOMER'}">
 		<div class="form-check disabled">
-        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="CUSTOMER" disabled checked>
         <label class="form-check-label" for="gridRadios3">
           소비자
         </label>
       </div>
-     
+
       <div class="form-check disabled">
-        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="ADMIN" disabled>
         <label class="form-check-label" for="gridRadios3">
           관리자
         </label>
       </div>
+ 	 </c:when>
+
+	<c:otherwise>
+	
+			<div class="form-check disabled">
+        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="CUSTOMER" disabled >
+        <label class="form-check-label" for="gridRadios3">
+          소비자
+        </label>
+      </div>
+
+      <div class="form-check disabled">
+        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios6" value="ADMIN" disabled checked>
+        <label class="form-check-label" for="gridRadios3">
+          관리자
+        </label>
+      </div>
+	
+	</c:otherwise>
+	</c:choose>
       <br>
-		<input type="button" id="btnsave" class="btn btn-dark" value="회원가입">
+		
 	</form>
+	<button id="btn-save" class="btn btn-dark" >회원가입</button>
 	</div>
+	
+	 <script type="text/javascript" src="/js/customer.js"></script>
 <%@ include file="../layout/footer.jsp"%>
