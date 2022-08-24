@@ -46,9 +46,15 @@ public class Customer {
 	@Column(nullable=false, length = 50)
 	private String email;
 	
-	@Column(nullable=false, length = 100)
+	@Column(nullable=false, length = 300)
 	private String address;
 
+	@Column(nullable=false, length = 50)
+	private String qestion;
+	
+	@Column(nullable=false, length = 30)
+	private String answer;
+	
 //	@ColumnDefault("'USER'")
 	@Column(nullable=false, length = 20)
 	private String roles;

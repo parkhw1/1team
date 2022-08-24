@@ -25,5 +25,9 @@ public class CustomerService {
 		customerRepository.save(customer);
 	}
 	
-
+	@Transactional
+	public boolean 중복체크(Customer customer) {
+		System.out.println(customerRepository.existsByUserid("parkhw"));
+		return customerRepository.existsByUserid(customer.getUserid());
+	}
 }

@@ -25,5 +25,12 @@ public class CustomerApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}
 	
+	@PostMapping("/auth/idCheckProc")
+	public boolean idCheck(@RequestBody Customer customer) {
+		System.out.println(customer.getUserid());
+		boolean idchk = customerService.중복체크(customer);
+		System.out.println(idchk);
+		return idchk;
+	}
 	
 }
