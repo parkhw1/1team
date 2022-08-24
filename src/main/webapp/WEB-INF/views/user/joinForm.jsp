@@ -7,9 +7,12 @@
 <div class="container" >
 	<form>
 		<div >
-			<label for="id">아이디</label><br>
-			<input type="text"  placeholder="Enter id" id="id">
+			<label for="userid">아이디</label><br>
+			<input type="text"  placeholder="Enter id" id="userid" name="userid">
+			<input type="hidden" id="reid" >
+			<input type="button" value="중복체크" class="btn btn-dark" onclick="idCheck()">
 		</div>
+		
 		<div >
 			<label for="password">비밀번호</label> <br>
 			<input type="password" placeholder="Enter password" id="password">
