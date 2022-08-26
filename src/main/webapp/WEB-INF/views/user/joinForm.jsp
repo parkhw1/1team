@@ -29,6 +29,12 @@
 			<label for="name"><b>이름</b></label> <br>
 			<input type="text" class="form-control" id="name">
 		</div>
+		<div class="form-group">
+			<label for="phone"><b>전화번호</b></label> <br>
+			<input type="text" class="form-control" id="phone" placeholder="'-' 는 생략">
+			<div id="ph-chk"></div>
+			<input type="hidden" id=phnchk>
+		</div>
 		<br>
 		<label for="email"><b>이메일</b></label> <br>
 		<div class="row">

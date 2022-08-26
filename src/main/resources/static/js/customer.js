@@ -10,7 +10,27 @@ let index = {
 		$("#btn-check").on("click", () => {
 			this.idCheck();
 		});
+		$("#btn-findid").on("click", () => {
+			this.findId();
+		});
+		$("#btn-findpwd").on("click", () => {
+			this.findPwd();
+			this.sendId();		
+		});
+		$("#btn-close").on("click", () => {
+			this.close();
+		});
+		$("#btn-change").on("click", () => {
+			this.changePwd();		
+		});
+		$("#phone").on("keyup",()=>{
+			this.phoneCheck();
+		})
 	},
+
+/////////////////////////////////
+//////////////회원가입//////////////
+/////////////////////////////////
 
 	save: function() {
 		if($("#userid").val() != ""
@@ -18,6 +38,8 @@ let index = {
 		&&$("#password").val() != ""
 		&&$("#password2").val() != ""
 		&&$("#name").val() != ""
+		&&$("#phone").val() != ""
+		&&$("#phnchk").val() != ""
 		&&$("#email").val() != ""
 		&&$("#email2").val() != ""
 		&&$("#addr1").val() != ""
@@ -41,9 +63,10 @@ let index = {
 		})
 
 		let data = {
-			userid: $("#userid").val(),
+			userid: $("#reid").val(),
 			password: $("#password").val(),
 			name: $("#name").val(),
+			phone: $("#phone").val(),
 			email: $("#email").val() + "@" + $("#email2").val(),
 			address: $("#addr1").val()+$("#addr2").val()+$("#addr3").val(),
 			qestion:$("#sel2").val(),
@@ -63,6 +86,10 @@ let index = {
 		});
 	},
 	
+	
+/////////////////////////////
+///////////로그인//////////////
+/////////////////////////////
 
 
 	loginCheck: function() {
@@ -100,6 +127,7 @@ let index = {
 					$("#id_check").text("이미 사용중인 아이디입니다");
 					$("#id_check").css("color", "red");
 					$("#id_check").css("font-weight", "900");
+					$("#reid").val("");
 				}else{
 					$("#id_check").text("사용가능한 아이디입니다");
 					$("#id_check").css("color", "#6A82FB");
@@ -108,14 +136,195 @@ let index = {
 				}
 			},
 			error:function(){
-				alert('에러입니다')
+				alert('에러입니다');
 			}
 		});
+	},
+	
+	//////////////////////////
+	//////전화번호중복체크/////////
+	//////////////////////////
+	
+	phoneCheck:function(){
+		let data = {
+			phone: $("#phone").val()
+		};
+		$.ajax({
+			type: "POST",
+			async: false,
+			url: "/auth/phoneCheckProc",
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success : function(data){
+				if($("#phone").val().length==11){
+					if(data==true){
+						$("#ph-chk").text("이미 등록된 번호입니다");
+						$("#ph-chk").css("color", "red");
+						$("#ph-chk").css("font-weight", "900");
+						$("#phnchk").val("");
+						console.log($("#phnchk").val());
+					}else{
+						$("#ph-chk").text("사용가능한 번호입니다");
+						$("#ph-chk").css("color", "#6A82FB");
+						$("#ph-chk").css("font-weight", "900");
+						$("#phnchk").val($("#phone").val());
+						console.log($("#phnchk").val());
+					}
+				}
+			},
+			error:function(){
+				alert('에러입니다');
+			}
+			
+			});
+		
+		
+		
+	},
+
+	///////////////////////
+	///////아이디찾기/////////
+	///////////////////////
+
+	findId: function(){
+		
+		if($("#phone").val()==""){
+			alert('전화번호를 입력하세요');
+			return false;
+		}
+		
+		
+		let data = {
+			phone: $("#phone").val()
+		};
+		$.ajax({
+			type: "POST",
+			async: false,
+			url: "/auth/findIdProc",
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+			
+	
+		}).done(function(res){
+			
+				if(res.data!="fail"){
+					$("#find_id").text("회원님의 아이디는 " +  res.data + " 입니다.");
+					$("#find_id").css("background-color", "rgba(135, 207, 235, 0.3)");
+					$("#saveid").val(res.data);
+				}else{
+					$("#find_id").text("아이디를 찾을 수 없습니다.");
+					$("#find_id").css("background-color", "rgba(255, 0, 0, 0.3)");
+					$("#saveid").val("");
+				}
+			console.log($("#saveid").val());
+		});
+		this.showDiv();
+	},
+	
+	
+	/////////////////////
+	/////비밀번호찾기////////
+	/////////////////////
+	
+	findPwd: function(){
+		if($("#userid").val()==""){
+			alert('아이디를 입력하세요.');
+			return false;
+		}
+		if(sel.selectedIndex==0){
+		alert('질문을 선택하세요.');
+		return false;
+		}
+		if($("#answer").val()==""){
+			alert('질문에 대한 답변을 입력하세요.');
+			return false;
+		}
+		var uid = $("#userid").val();
+		var add = "?userid="+uid
+		let data = {
+			userid: $("#userid").val(),
+			qestion: $("#sel").val() ,
+			answer: $("#answer").val() 
+		};
+		$.ajax({
+			type: "POST",
+			async: false,
+			url: "/auth/findPwdProc",
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(res){
+			
+			if(res.data==true){
+				location.href = "/auth/changePwdForm"+add;
+		
+			}else{
+				$("#find_pwd").text("회원정보가 일치하지 않습니다.");
+				$("#find_pwd").css("background-color", "rgba(255, 0, 0, 0.3)");
+			}
+		});
+		this.showDiv();
+	},
+	
+	///////////////////////
+	/////////비밀번호변경//////
+	///////////////////////
+
+
+	changePwd:function(){
+		var password = $("#password").val();
+		var password2 = $("#password2").val();
+		
+		if(password == "") {
+			alert("비밀번호를 입력하세요.");
+			$("#password").focus();
+			return false;
+		}
+		if(password2 == "") {
+			alert("비밀번호확인을 입력하세요.");
+			$("#password2").focus();
+			return false;
+		}
+		if(password!=password2){
+			alert("비밀번호를 일치하지 않습니다. 확인해주세요.")
+			$("#password2").focus();
+			return false;
+		}
+		
+		
+		let data = {
+			userid: $("#userid").val(),
+			password: password,
+		};
+		$.ajax({
+			type: "PUT",
+			url: "/auth/changePwdProc",
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function() {
+			alert("비밀번호 변경이 완료되었습니다.");
+			self.close();
+		});
+		
 	},
 
 
 
+	showDiv: function(){
+		$("#find").css("display","block");
+	},
 	
+	close: function(){
+		self.close();
+	},
+	
+	////////////////////////////
+	///////////회원가입체크/////////
+	////////////////////////////
+
 
 	joinCheck: function(){
 		var password = $("#password").val();
@@ -156,6 +365,16 @@ let index = {
 			$("#name").focus();
 			return false;
 		}
+		if($("#phone").val() == "") {
+			alert("전화번호를 입력하세요.");
+			$("#phone").focus();
+			return false;
+		}
+		if($("#phnchk").val() == "") {
+			alert("전화번호를 확인하세요");
+			$("#phone").focus();
+			return false;
+		}
 		if($("#email").val() == "") {
 			alert("이메일아이디를 입력하세요.");
 			$("#email").focus();
@@ -182,11 +401,18 @@ let index = {
 			return false;
 		}
 		
+		
+		if(sel2.selectedIndex==0) {
+			alert("계정찾기용 질문을 확인하세요.");
+			$("#sel2").focus();
+			return false;
+		}
 		if($("#answer").val() == "") {
-			alert("계정찾기용 질문/답변을 확인하세요.");
+			alert("계정찾기용 답변을 확인하세요.");
 			$("#answer").focus();
 			return false;
 		}
+		
 		
 		return true;
 	}
@@ -203,6 +429,9 @@ index.init();
 
 
 
+///////////////////////////
+//////////이메일주소//////////
+//////////////////////////
 
 
 function change() {
@@ -215,17 +444,22 @@ function change() {
 	}
 }
 
+///////////////////////////
+///////아이디/비밀번호찾기창/////
+//////////////////////////
 
 function findAccount(){
 	
 	var url="findAccount";
 	window.open(url,"blank_1","toolbar=no, menubar=no, scrollbars=yes,resizable=no," +
-			"width=700, height=400");
+			"width=800, height=600");
 
 }
 
 
-
+////////////////////////////
+///////////주소api///////////
+///////////////////////////
 
 
 

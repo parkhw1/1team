@@ -32,6 +32,28 @@ public class CustomerController {
 		return "user/findAccount";
 	}
 	
-
+	@GetMapping("/auth/findid")
+	public String findIdForm() {
+		return "user/findid";
+	}
 	
+	@GetMapping("/auth/findPassword")
+	public String findPwdForm() {
+		return "user/findPassword";
+	}
+	
+	@GetMapping("/auth/changePwdForm/**")
+	public String changePwdForm() {
+		return "user/changePwdForm";
+	}
+	
+	@GetMapping("/auth/pwdCheck")
+	public String pwdCheck() {
+		return "user/pwdCheck";
+	}
+	
+	@GetMapping("/auth/myPage")
+	public String myPage() {
+		return "user/myPage";
+	}
 }
