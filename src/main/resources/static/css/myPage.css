@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap')
+	;
+
+
+
+
+
+.pwdCheckCon{
+	margin:0 auto;
+	width:300px;
+	height:200px;
+	margin-top:50px;
+}
+
+#btn-ok{
+	width:300px;
+}

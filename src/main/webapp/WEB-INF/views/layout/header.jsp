@@ -27,8 +27,13 @@
 <link rel="stylesheet" href="/css/adminCheck.css">
 <link rel="stylesheet" href="/css/loginForm.css">
 <link rel="stylesheet" href="/css/joinForm.css">
+<link rel="stylesheet" href="/css/myPage.css">
+<link rel="stylesheet" href="/css/noticeList.css">
+<link rel="stylesheet" href="/css/qnaList.css">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+
 <style>
 #container3 {
 	margin:0 auto;
@@ -54,14 +59,14 @@
 					<li><a href="/auth/loginForm">로그인</a></li>
 					<li><a href="/auth/adminCheck">회원가입</a></li>
 					<li><a href="#">장바구니</a></li>
-					<li><a href="#">고객센터</a></li>
+					<li><a href="/notice/noticeList">고객센터</a></li>
 				</ul>
 				</c:when>
 				<c:otherwise>
 					<ul id="topMenu">
 						<li><a href="/auth/pwdCheck">마이페이지</a><li>
 						<li><a href="#">장바구니</a></li>
-						<li><a href="#">고객센터</a></li>
+						<li><a href="/notice/noticeList">고객센터</a></li>
 						<li><a href="/logout">로그아웃</a></li>
 					</ul>
 				</c:otherwise>
